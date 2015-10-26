@@ -39,9 +39,6 @@ train$month <- as.integer(format(train$Date, "%m"))
 train$year <- as.integer(format(train$Date, "%y"))
 train$day <- as.integer(format(train$Date, "%d"))
 
-train$wday <- unclass(as.POSIXct(train$day))
-
-
 # removing the date column (since elements are extracted) and also StateHoliday which has a lot of NAs (may add it back in later)
 train <- train[,-c(3,8)]
 
