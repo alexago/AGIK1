@@ -94,7 +94,8 @@ param <- list(  objective           = "reg:linear",
 
 clf <- xgb.train(   params              = param, 
                     data                = dtrain, 
-                    nrounds             = 3000, #2000, #300, #280, #125, #250, # changed from 300
+                    nrounds             = 3000, #run is finished because number of rounds become 3000
+                    nfold               = 5,
                     verbose             = 0,
                     early.stop.round    = 100,
                     watchlist           = watchlist,
@@ -104,11 +105,5 @@ clf <- xgb.train(   params              = param,
 pred1 <- exp(predict(clf, data.matrix(test[,feature.names]))) -1
 submission <- data.frame(Id=test$Id, Sales=pred1)
 cat("saving the submission file\n")
-write_csv(submission, "xboost_pred_2.csv")
-
-
-
-datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
-x<-strptime(datestring, "%B %d, %Y %H:%M")
-x
+write_csv(submission, "xboost_pred_nfold5.csv")
 
